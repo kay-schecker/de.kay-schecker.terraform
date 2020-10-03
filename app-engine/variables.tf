@@ -13,7 +13,6 @@ variable "location" {
 }
 
 variable "env_variables" {
-  type = object({})
 }
 
 variable "entrypoint" {
