@@ -33,7 +33,7 @@ variable "runtime" {
 }
 
 variable "bucket_location" {
-  type = string
+  type    = string
   default = "europe-west3"
 }
 
@@ -47,4 +47,9 @@ variable "source_dir" {
 
 variable "domain_names" {
   type = list(string)
+}
+
+variable "create_google_app_engine_application" {
+  type    = bool
+  default = true
 }
