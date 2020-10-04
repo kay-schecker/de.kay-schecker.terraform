@@ -52,7 +52,12 @@ resource "google_app_engine_standard_app_version" "app" {
   }
 
   handlers {
-    security_level = "SECURE_ALWAYS"
+    url_regex                   = ".*"
+    redirect_http_response_code = "REDIRECT_HTTP_RESPONSE_CODE_301"
+    security_level              = "SECURE_ALWAYS"
+    script {
+      script_path = "auto"
+    }
   }
 
   automatic_scaling {
