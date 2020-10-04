@@ -32,8 +32,8 @@ resource "google_storage_bucket_object" "artifact" {
 
 resource "google_app_engine_standard_app_version" "app" {
 
-  version_id    = "v1"
-  service       = "default"
+  service       = var.service
+  version_id    = var.version_id
   project       = var.project
   runtime       = var.runtime
   env_variables = var.env_variables

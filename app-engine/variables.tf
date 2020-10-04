@@ -8,15 +8,24 @@ variable "dns_zone" {
   description = "The zone where to add the DNS record(s)"
 }
 
+variable "service" {
+  default = "default"
+}
+
 variable "location" {
   default = "europe-west3"
 }
 
 variable "env_variables" {
+  default = {}
 }
 
 variable "entrypoint" {
   default = "npm start"
+}
+
+variable "version_id" {
+  default = "v1"
 }
 
 variable "runtime" {
