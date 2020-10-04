@@ -14,7 +14,7 @@ data "google_dns_managed_zone" "zone" {
 }
 
 resource "google_app_engine_application" "app" {
-  count       = var.create_google_app_engine_application ? 1 : 0
+  count       = var.service == "default" ? 1 : 0
   project     = var.project
   location_id = var.location
 }

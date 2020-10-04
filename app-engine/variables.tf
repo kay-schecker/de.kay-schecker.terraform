@@ -48,8 +48,3 @@ variable "source_dir" {
 variable "domain_names" {
   type = list(string)
 }
-
-variable "create_google_app_engine_application" {
-  type    = bool
-  default = var.service == "default"
-}
