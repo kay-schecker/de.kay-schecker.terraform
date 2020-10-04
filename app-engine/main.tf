@@ -51,6 +51,10 @@ resource "google_app_engine_standard_app_version" "app" {
     }
   }
 
+  handlers {
+    security_level = "SECURE_ALWAYS"
+  }
+
   automatic_scaling {
     max_concurrent_requests = 10
     min_idle_instances      = 1
