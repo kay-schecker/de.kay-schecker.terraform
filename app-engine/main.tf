@@ -21,7 +21,7 @@ resource "google_app_engine_application" "app" {
 resource "google_storage_bucket" "artifacts" {
   project  = var.project
   location = var.bucket_location
-  name     = "${var.project}-artifacts"
+  name     = "${var.project}-${var.service}-artifacts"
 }
 
 resource "google_storage_bucket_object" "artifact" {
