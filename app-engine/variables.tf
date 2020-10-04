@@ -51,5 +51,5 @@ variable "domain_names" {
 
 variable "create_google_app_engine_application" {
   type    = bool
-  default = true
+  default = var.service == "default"
 }
