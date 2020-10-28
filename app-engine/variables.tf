@@ -3,11 +3,6 @@ variable "dns_project_id" {
   description = "The project where to add the DNS record(s)"
 }
 
-variable "dns_zone" {
-  default     = "kay-schecker"
-  description = "The zone where to add the DNS record(s)"
-}
-
 variable "service" {
   default = "default"
 }
@@ -46,5 +41,7 @@ variable "source_dir" {
 }
 
 variable "domain_names" {
-  type = list(string)
+  default = {
+    foo: 1,
+  }
 }

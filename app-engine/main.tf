@@ -1,7 +1,3 @@
-locals {
-  domain_names_set = toset(var.domain_names)
-}
-
 data "archive_file" "artifact" {
   type        = "zip"
   source_dir  = var.source_dir
@@ -9,8 +5,9 @@ data "archive_file" "artifact" {
 }
 
 data "google_dns_managed_zone" "zone" {
-  project = var.dns_project_id
-  name    = var.dns_zone
+  for_each = toset(distinct(values(var.domain_names)))
+  project  = var.dns_project_id
+  name     = each.value
 }
 
 resource "google_app_engine_application" "app" {
@@ -79,8 +76,8 @@ resource "google_app_engine_standard_app_version" "app" {
 
 resource "google_app_engine_domain_mapping" "app" {
   project     = var.project
-  for_each    = local.domain_names_set
-  domain_name = each.value
+  for_each    = var.domain_names
+  domain_name = each.key
 
   ssl_settings {
     ssl_management_type = "AUTOMATIC"
@@ -90,15 +87,15 @@ resource "google_app_engine_domain_mapping" "app" {
 
 resource "google_dns_record_set" "dns" {
   project  = var.dns_project_id
-  for_each = local.domain_names_set
+  for_each = var.domain_names
 
   depends_on = [
     google_app_engine_domain_mapping.app
   ]
 
   type         = "CNAME"
-  name         = "${each.value}."
-  managed_zone = data.google_dns_managed_zone.zone.name
+  name         = "${each.key}."
+  managed_zone = data.google_dns_managed_zone.zone[each.value].name
   ttl          = 600
 
   rrdatas = [
