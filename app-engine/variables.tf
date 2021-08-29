@@ -20,7 +20,7 @@ variable "entrypoint" {
 }
 
 variable "version_id" {
-  default = "v1"
+  default = "v2"
 }
 
 variable "runtime" {
@@ -41,7 +41,5 @@ variable "source_dir" {
 }
 
 variable "domain_names" {
-  default = {
-    foo: 1,
-  }
+  default = {}
 }
