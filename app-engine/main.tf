@@ -23,7 +23,7 @@ resource "google_storage_bucket" "artifacts" {
 }
 
 resource "google_storage_bucket_object" "artifact" {
-  name   = "artifact-${data.archive_file.artifact.output_md5}"
+  name   = "artifact-${data.archive_file.artifact.output_md5}.zip"
   bucket = google_storage_bucket.artifacts.name
   source = data.archive_file.artifact.output_path
 }
