@@ -60,28 +60,6 @@ resource "google_app_engine_standard_app_version" "app" {
     }
   }
 
-  handlers {
-    auth_fail_action = "AUTH_FAIL_ACTION_REDIRECT"
-    login            = "LOGIN_OPTIONAL"
-    security_level   = "SECURE_OPTIONAL"
-    url_regex        = ".*"
-
-    script {
-      script_path = "auto"
-    }
-  }
-
-  handlers {
-    auth_fail_action = "AUTH_FAIL_ACTION_REDIRECT"
-    login            = "LOGIN_OPTIONAL"
-    security_level   = "SECURE_OPTIONAL"
-    url_regex        = ".*"
-
-    script {
-      script_path = "auto"
-    }
-  }
-
   automatic_scaling {
     max_concurrent_requests = 10
     min_idle_instances      = 1
