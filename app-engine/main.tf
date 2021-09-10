@@ -28,13 +28,21 @@ resource "google_storage_bucket_object" "artifact" {
   source = data.archive_file.artifact.output_path
 }
 
+data "google_app_engine_default_service_account" "default" {
+  project = var.project
+}
+
 resource "google_app_engine_standard_app_version" "app" {
 
   service       = var.service
   version_id    = var.version_id
   project       = var.project
   runtime       = var.runtime
-  env_variables = var.env_variables
+
+  env_variables = merge(var.env_variables, {
+    SERVICE_ACCOUNT_UID = data.google_app_engine_default_service_account.default.unique_id,
+    SERVICE_ACCOUNT_EMAIL = data.google_app_engine_default_service_account.default.email
+  })
 
   delete_service_on_destroy = true
 
