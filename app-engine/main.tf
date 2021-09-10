@@ -61,6 +61,9 @@ resource "google_app_engine_standard_app_version" "app" {
   }
 
   handlers {
+    auth_fail_action = "AUTH_FAIL_ACTION_REDIRECT"
+    login            = "LOGIN_OPTIONAL"
+    security_level   = "SECURE_OPTIONAL"
     url_regex        = ".*"
 
     script {
