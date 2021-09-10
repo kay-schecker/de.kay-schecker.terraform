@@ -61,7 +61,7 @@ resource "google_app_engine_standard_app_version" "app" {
     max_concurrent_requests = 10
     min_idle_instances      = 1
     max_idle_instances      = 3
-    min_pending_latency     = "2.5s"
+    min_pending_latency     = "2.500s"
     max_pending_latency     = "5s"
 
     standard_scheduler_settings {
