@@ -38,24 +38,39 @@ resource "google_app_engine_standard_app_version" "app" {
 
   delete_service_on_destroy = true
 
-  entrypoint {
-    shell = var.entrypoint
-  }
-
   deployment {
     zip {
       source_url = "https://storage.googleapis.com/${google_storage_bucket_object.artifact.bucket}/${google_storage_bucket_object.artifact.name}"
     }
   }
 
+  entrypoint {
+    shell = var.entrypoint
+  }
+
   handlers {
-    url_regex                   = ".*"
+    auth_fail_action            = "AUTH_FAIL_ACTION_REDIRECT"
+    login                       = "LOGIN_OPTIONAL"
     redirect_http_response_code = "REDIRECT_HTTP_RESPONSE_CODE_301"
     security_level              = "SECURE_ALWAYS"
+    url_regex                   = ".*"
+
     script {
       script_path = "auto"
     }
   }
+
+  handlers {
+    auth_fail_action = "AUTH_FAIL_ACTION_REDIRECT"
+    login            = "LOGIN_OPTIONAL"
+    security_level   = "SECURE_OPTIONAL"
+    url_regex        = ".*"
+
+    script {
+      script_path = "auto"
+    }
+  }
+
 
   automatic_scaling {
     max_concurrent_requests = 10
