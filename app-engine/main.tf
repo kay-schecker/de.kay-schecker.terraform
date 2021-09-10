@@ -60,6 +60,14 @@ resource "google_app_engine_standard_app_version" "app" {
     }
   }
 
+  handlers {
+    url_regex        = ".*"
+
+    script {
+      script_path = "auto"
+    }
+  }
+
   automatic_scaling {
     max_concurrent_requests = 10
     min_idle_instances      = 1
